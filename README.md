@@ -4,6 +4,9 @@ One-command install of my **Omarchy** desktop — a dark "Rob Theme" (Tokyo Nigh
 palette) with a blue `#1793d1` accent and a matching shell, bar, and window-border
 gradient.
 
+<img width="1920" height="1080" alt="screenshot-2026-08-28_07-21-06" src="https://github.com/user-attachments/assets/3d85bb3e-3f1f-48e3-a0f0-2f661d286b5c" />
+
+
 ## Install
 
 ```bash
