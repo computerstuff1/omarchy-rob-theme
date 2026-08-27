@@ -3,7 +3,7 @@ import qs.Ui
 
 BarWidget {
     id: root
-    moduleName: "rob.menu"
+    moduleName: "rob.menubutton"
 
     implicitWidth: button.implicitWidth
     implicitHeight: button.implicitHeight
@@ -32,7 +32,7 @@ BarWidget {
             if (mouseButton === Qt.RightButton)
                 root.bar.run("xdg-terminal-exec")
             else
-                root.bar.run("omarchy-shell shell toggle omarchy.menu '{\"menu\":\"root\"}'")
+                root.bar.run("omarchy-shell shell toggle rob.menu '{\"menu\":\"root\"}'")
         }
     }
 }

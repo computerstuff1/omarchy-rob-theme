@@ -1,20 +1,18 @@
 {
   "schemaVersion": 1,
   "id": "rob.menu",
-  "name": "My Menu Button",
+  "name": "My Omarchy menu",
   "version": "1.0.0",
-  "author": "Rob",
-  "description": "Custom Archlogo menu button",
+  "author": "Omarchy",
+  "description": "Quickshell-powered Omarchy command menu",
   "kinds": [
-    "bar-widget"
+    "menu"
   ],
+  "keepLoaded": true,
   "entryPoints": {
-    "barWidget": "BarWidget.qml"
+    "menu": "Menu.qml"
   },
-  "barWidget": {
-    "displayName": "My Menu Button",
-    "description": "Custom SVG menu button",
-    "category": "Compositor",
-    "allowMultiple": false
+  "omarchy": {
+    "clonedFrom": "omarchy.menu"
   }
 }

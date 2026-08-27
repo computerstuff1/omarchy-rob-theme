@@ -11,7 +11,7 @@
     "layout": {
       "left": [
         {
-          "id": "rob.menu"
+          "id": "rob.menubutton"
         },
         {
           "id": "rob.workspaces"
@@ -63,5 +63,12 @@
     },
     "id": "rob.bar"
   },
-  "plugins": []
+  "plugins": [
+    {
+      "id": "rob.menu"
+    }
+  ],
+  "disabledPlugins": [
+    "omarchy.menu"
+  ]
 }

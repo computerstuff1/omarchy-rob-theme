@@ -149,7 +149,7 @@ sed "s|@LOGO_PATH@|$FASTFETCH_LOGO_DIR/Linux.png|" \
   "$REPO_DIR/dotfiles/fastfetch/config.jsonc" > "$HOME/.config/fastfetch/config.jsonc"
 
 # bar plugins
-for p in rob.bar rob.clock rob.menu rob.workspaces rob.updates; do
+for p in rob.bar rob.clock rob.menu rob.menubutton rob.workspaces rob.updates; do
   backup "plugins/$p" "$OMARCHY_CFG/plugins/$p"
   mkdir -p "$OMARCHY_CFG/plugins"
   rm -rf "$OMARCHY_CFG/plugins/$p"
@@ -159,7 +159,7 @@ ok "dotfiles installed"
 
 info "Step 5/6 — registering widgets"
 omarchy-shell shell rescanPlugins || warn "rescan failed (is the shell running?)"
-for id in rob.bar rob.clock rob.menu rob.workspaces rob.updates; do
+for id in rob.bar rob.clock rob.menu rob.menubutton rob.workspaces rob.updates; do
   omarchy plugin enable "$id" 2>/dev/null || true
 done
 ok "widgets registered"

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "rob.menubutton",
+  "name": "My Menu Button",
+  "version": "1.0.0",
+  "author": "Rob",
+  "description": "Custom Archlogo menu button",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "My Menu Button",
+    "description": "Custom SVG menu button",
+    "category": "Compositor",
+    "allowMultiple": false
+  }
+}

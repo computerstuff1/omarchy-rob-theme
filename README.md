@@ -47,7 +47,7 @@ omarchy-rob-theme/
     ├── ghostty/config           terminal font/size/padding/keybinds
     ├── kitty/kitty.conf         terminal font/padding/opacity/tab style
     ├── fastfetch/               config + custom Linux logo (path auto-rewritten)
-    ├── plugins/rob.*            bar, clock, menu, workspaces, updates widgets
+    ├── plugins/rob.*            bar, clock, menu, menubutton, workspaces, updates widgets
     ├── vim/                     .vimrc + catppuccin_mocha.vim colorscheme
     └── bin/system-update-count  pending repo+AUR update counter
 ```
