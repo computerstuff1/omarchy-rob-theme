@@ -71,6 +71,9 @@ omarchy-rob-theme/
 - The bar plugins (`rob.bar`, `rob.clock`, `rob.workspaces`) are local edits of
   Omarchy's built-ins, vendored as-is. They won't pick up future `omarchy update`
   improvements to the originals.
+- `rob.menu` is a vendored clone of the built-in `omarchy.menu` (kept as a fixed
+  id so `shell.json` and `rob.menubutton` can reference it regardless of username);
+  it won't pick up future changes to `omarchy.menu`.
 - `keyboard.rgb` only takes effect if your keyboard-RGB tool reads Omarchy's theme
   file; the script can't force it.
 - fastfetch's logo is bundled and its path is rewritten at install, so there are no
