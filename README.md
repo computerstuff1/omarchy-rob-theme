@@ -74,6 +74,132 @@ omarchy-rob-theme/
 | Icons | Yaru-magenta |
 | Wallpaper | `default.png` |
 
+## Customizing
+
+Everything you might want to tweak is a plain file in this repo. Edit it, then
+re-apply (the `Re-apply` column below). `install.sh` is safe to re-run any time,
+but individual changes apply faster with the commands listed.
+
+### Where the files live
+
+| What you're editing | Repo source | Installed to |
+|---|---|---|
+| Theme colors | `theme/colors.toml` | `~/.config/omarchy/themes/rob-theme/colors.toml` |
+| Bar surface | `theme/shell.bar.toml` | `~/.config/omarchy/themes/rob-theme/shell.bar.toml` |
+| Lock screen surface | `theme/shell.lock.toml` | `~/.config/omarchy/themes/rob-theme/shell.lock.toml` |
+| Icon theme | `theme/icons.theme` | `~/.config/omarchy/themes/rob-theme/icons.theme` |
+| Keyboard RGB | `theme/keyboard.rgb` | `~/.config/omarchy/themes/rob-theme/keyboard.rgb` |
+| Wallpaper | `backgrounds/default.png` | `~/.config/omarchy/themes/rob-theme/backgrounds/default.png` |
+| Bar layout / widget placement | `dotfiles/shell.json` | `~/.config/omarchy/shell.json` |
+| Border gradient, menu style | `dotfiles/shell.toml` | `~/.config/omarchy/shell.toml` |
+| Shell prompt | `dotfiles/starship/starship.toml` | `~/.config/starship.toml` |
+| Window look (gaps/borders/blur/master) | `dotfiles/hypr/looknfeel.lua` | `~/.config/hypr/looknfeel.lua` |
+| Key bindings | `dotfiles/hypr/bindings.lua` | `~/.config/hypr/bindings.lua` |
+| Hyprland load order / flags | `dotfiles/hypr/hyprland.lua` | `~/.config/hypr/hyprland.lua` |
+| Terminal font/padding/keybinds (ghostty) | `dotfiles/ghostty/config` | `~/.config/ghostty/config` |
+| Terminal font/padding/opacity (kitty) | `dotfiles/kitty/kitty.conf` | `~/.config/kitty/kitty.conf` |
+| Monospace font | `dotfiles/fontconfig/fonts.conf` | `~/.config/fontconfig/fonts.conf` |
+| fastfetch | `dotfiles/fastfetch/config.jsonc` | `~/.config/fastfetch/config.jsonc` |
+| fastfetch logo | `dotfiles/fastfetch/Linux.png` | `~/.local/share/omarchy-rob-theme/Linux.png` |
+| Vim | `dotfiles/vim/vimrc`, `dotfiles/vim/colors/` | `~/.vimrc`, `~/.vim/colors/` |
+| Update-count script | `dotfiles/bin/system-update-count` | `~/.config/omarchy/bin/system-update-count` |
+| Logo button / workspace / updates widgets | `dotfiles/plugins/rob.{menubutton,workspaces,updates}/` | `~/.config/omarchy/plugins/` |
+| Floating bar + seconds clock | `patches/{bar,clock}.patch` | generated → `~/.config/omarchy/plugins/rob.{bar,clock}/` |
+
+### Colors, accent & palette
+
+The palette is **Tokyo Night**, accent **`#1793d1`**, and lives in
+`theme/colors.toml`. Change `accent` or any named color there, and everything
+that reads Omarchy's theme colors (bar, terminals, prompt via `colors.toml`)
+follows. The window/bar **border gradient** and **menu** styling are separate,
+in `dotfiles/shell.toml` (`[hyprland] active-border` / `[bar] border` / `[menu]`).
+
+> Note: terminal *colors* come from the theme dynamically — the ghostty/kitty
+> configs `include` Omarchy's generated theme file (`~/.local/state/omarchy/current/theme/{ghostty,kitty}.conf`).
+> To recolor terminals, edit `theme/colors.toml`, not the terminal configs.
+
+**Re-apply:** `omarchy theme set "Rob Theme"`.
+
+### Bar layout & widgets
+
+Reorder, add, or remove bar widgets in `dotfiles/shell.json` (`bar.layout`).
+Built-in widgets use `omarchy.*` ids; the theme's custom ones are
+`rob.menubutton` (logo), `rob.workspaces` (workspace rings), and `rob.updates`
+(update count). The bar's `id` must stay `rob.bar` (the patched floating bar).
+
+- Change the clock format on the `omarchy.clock` entry's `format` field
+  (the `rob.clock` clone ticks seconds whenever `ss`/`s` is present).
+- `rob.updates` shows repo+AUR counts from `dotfiles/bin/system-update-count`
+  (needs `checkupdates`/`yay`). Tweak the poll interval in
+  `dotfiles/plugins/rob.updates/SystemUpdates.qml`.
+
+**Re-apply:** `shell.json` hot-reloads on save; widget code under
+`~/.config/omarchy/plugins/` reloads on save. Force with `omarchy restart shell`.
+
+### Floating bar & seconds clock (the patches)
+
+These are implemented as minimal patches against the current built-ins —
+see [`docs/upstream.md`](docs/upstream.md) for the full diff and rationale.
+
+- **Floating bar** inset/rounding: add `"margin": 8` / `"radius": 14` to the
+  `bar` object in `dotfiles/shell.json` (the patched `rob.bar` reads these).
+- **Gradient surface / indicator thickness** are literal values inside
+  `patches/bar.patch` (search `#1793d1`); edit the hunk and re-apply.
+
+**Re-apply:** `./install.sh` (re-clones + re-patches), or the same thing runs
+automatically after each `omarchy update` via the `post-update` hook.
+
+### Hyprland look & feel
+
+- Gaps, borders, rounded corners, blur, master layout: `dotfiles/hypr/looknfeel.lua`.
+- Key bindings (bind/unbind): `dotfiles/hypr/bindings.lua`.
+- Load order / flags / which `hypr.*` files load first: `dotfiles/hypr/hyprland.lua`.
+
+**Re-apply:** Hyprland auto-reloads on save; verify with `hyprctl reload` and
+`hyprctl configerrors`.
+
+### Terminals, prompt, font, vim, fastfetch
+
+- **Ghostty:** `dotfiles/ghostty/config` (font, size, padding, keybinds).
+- **Kitty:** `dotfiles/kitty/kitty.conf` (font, padding, opacity, tab style).
+- **Prompt:** `dotfiles/starship/starship.toml` (two-line layout, module colors).
+- **Font:** the theme uses `JetBrainsMono Nerd Font`. Change it in
+  `dotfiles/fontconfig/fonts.conf` (system monospace) *and* the ghostty/kitty
+  configs (or run `omarchy font set <name>` instead; `omarchy font list`).
+- **Vim:** `dotfiles/vim/vimrc` (statusline, indentation, colorscheme call) and
+  `dotfiles/vim/colors/catppuccin_mocha.vim`.
+- **fastfetch:** `dotfiles/fastfetch/config.jsonc` — note the logo `source` is
+  the placeholder `@LOGO_PATH@` that `install.sh` rewrites at install time, so
+  keep it as-is when editing.
+
+**Re-apply:** terminals → `omarchy restart terminal`; starship/vim/fastfetch →
+  new shell / next launch. `./install.sh` re-stages any of these.
+
+### Wallpaper, icons, keyboard RGB
+
+- **Wallpaper:** replace `backgrounds/default.png` (any resolution; keep the name).
+- **Icons:** set the GTK icon theme name in `theme/icons.theme` (currently `Yaru-magenta`).
+- **Keyboard RGB:** `theme/keyboard.rgb` holds a hex color read *only* if your
+  keyboard-RGB tooling consumes Omarchy's theme file — the script can't force it.
+
+**Re-apply:** `omarchy theme set "Rob Theme"` (then `omarchy theme bg next` to
+cycle wallpapers).
+
+### Quick start: the 3 most common edits
+
+```bash
+# 1. Change the accent colour everywhere
+sed -i 's/#1793d1/#YOURHEX/' theme/colors.toml && omarchy theme set "Rob Theme"
+
+# 2. Make the bar float more / less
+#    edit dotfiles/shell.json -> "bar": { "margin": 12, "radius": 16 }
+omarchy restart shell
+
+# 3. Close the window gaps in tighter
+#    edit dotfiles/hypr/looknfeel.lua -> gaps_in / gaps_out, then:
+hyprctl reload
+```
+
 ## Update-proof design
 
 The theme is built to survive `omarchy update` and track upstream improvements:
