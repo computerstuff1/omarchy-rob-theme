@@ -45,6 +45,7 @@ omarchy-rob-theme/
     ├── hypr/                    looknfeel (borders/gaps/master/blur), bindings, base flags
     ├── fontconfig/fonts.conf    JetBrainsMono Nerd Font
     ├── ghostty/config           terminal font/size/padding/keybinds
+    ├── kitty/kitty.conf         terminal font/padding/opacity/tab style
     ├── fastfetch/               config + custom Linux logo (path auto-rewritten)
     ├── plugins/rob.*            bar, clock, menu, workspaces, updates widgets
     ├── vim/                     .vimrc + catppuccin_mocha.vim colorscheme

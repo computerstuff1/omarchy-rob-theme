@@ -122,6 +122,11 @@ backup "ghostty/config" "$HOME/.config/ghostty/config"
 mkdir -p "$HOME/.config/ghostty"
 cp "$REPO_DIR/dotfiles/ghostty/config" "$HOME/.config/ghostty/config"
 
+# kitty terminal
+backup "kitty/kitty.conf" "$HOME/.config/kitty/kitty.conf"
+mkdir -p "$HOME/.config/kitty"
+cp "$REPO_DIR/dotfiles/kitty/kitty.conf" "$HOME/.config/kitty/kitty.conf"
+
 # vim
 backup "vimrc" "$HOME/.vimrc"
 backup "vim/colors" "$HOME/.vim/colors" 2>/dev/null || true
