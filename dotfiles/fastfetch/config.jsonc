@@ -1,0 +1,161 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "kitty-direct",
+    "source": "@LOGO_PATH@",
+    "color": { "1": "green" },
+    "padding": {
+      "top": 11,
+      "right": 0,
+      "left": 0
+    }
+  },
+  "display": {
+    "disableLinewrap": true
+  },
+  "modules": [
+    "break",
+    "break",
+    {
+      "type": "custom",
+      "format": "\u001b[90m┌──────────────────Hardware──────────────────┐"
+    },
+    {
+      "type": "host",
+      "key": " PC",
+      "keyColor": "green"
+    },
+    {
+      "type": "cpu",
+      "key": " Cpu",
+      "showPeCoreCount": true,
+      "keyColor": "green"
+    },
+    {
+      "type": "gpu",
+      "key": "󰢮 Gpu",
+      "detectionMethod": "pci",
+      "format": "{name}",
+      "keyColor": "green"
+    },
+    {
+      "type": "display",
+      "key": "󱄄 Screen",
+      "keyColor": "green"
+    },
+    {
+      "type": "disk",
+      "key": "󰋊 SSD",
+      "keyColor": "green"
+    },
+    {
+      "type": "memory",
+      "key": " Ram",
+      "keyColor": "green"
+    },
+    {
+      "type": "swap",
+      "key": "󰯍 Swap ",
+      "keyColor": "green"
+    },
+    {
+      "type": "custom",
+      "format": "\u001b[90m└────────────────────────────────────────────┘"
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "\u001b[90m┌──────────────────Software──────────────────┐"
+    },
+    {
+      "type": "command",
+      "key": "󰣇 OS",
+      "keyColor": "blue",
+      "text": "version=$(omarchy-version) && echo \"Omarchy $version\""
+    },
+    {
+      "type": "command",
+      "key": "",
+      "keyColor": "blue",
+      "text": "omarchy-version-branch"
+    },
+    {
+      "type": "command",
+      "key": "󰔫 Branch",
+      "keyColor": "blue",
+      "text": "channel=$(omarchy-version-channel); echo \"$channel\""
+    },
+    {
+      "type": "kernel",
+      "key": " Kernel",
+      "keyColor": "blue"
+    },
+    {
+      "type": "wm",
+      "key": "󰧨 Wm",
+      "keyColor": "blue"
+    },
+    {
+      "type": "de",
+      "key": " DE",
+      "keyColor": "blue"
+    },
+    {
+      "type": "terminal",
+      "key": " Terminal",
+      "keyColor": "blue"
+    },
+    {
+      "type": "packages",
+      "key": "󰏖 Packages",
+      "keyColor": "blue"
+    },
+    {
+      "type": "wmtheme",
+      "key": "│ ├󰉼",
+      "keyColor": "blue"
+    },
+    {
+      "type": "command",
+      "key": "󰸌 Theme",
+      "keyColor": "blue",
+      "text": "theme=$(omarchy-theme-current); echo -e \"$theme \\e[38m●\\e[37m●\\e[36m●\\e[35m●\\e[34m●\\e[33m●\\e[32m●\\e[31m●\""
+    },
+    {
+      "type": "terminalfont",
+      "key": " Font",
+      "keyColor": "blue"
+    },
+    {
+      "type": "custom",
+      "format": "\u001b[90m└────────────────────────────────────────────┘"
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "\u001b[90m┌────────────Age / Uptime / Update───────────┐"
+    },
+    {
+      "type": "command",
+      "key": "󱦟 OS Age",
+      "keyColor": "#fab387",
+      "text": "echo $(( ($(date +%s) - $(stat -c %W /)) / 86400 )) days"
+    },
+    {
+      "type": "uptime",
+      "key": "󱫐 Uptime",
+      "keyColor": "#fab387"
+    },
+    {
+      "type": "command",
+      "key": "󰮯 Update",
+      "keyColor": "yellow",
+      "text": "updated=$(omarchy-version-pkgs); echo \"$updated\""
+    },
+    {
+      "type": "custom",
+      "format": "\u001b[90m└────────────────────────────────────────────┘"
+    },
+    "break"
+  ]
+}

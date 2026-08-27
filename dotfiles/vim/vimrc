@@ -1,0 +1,73 @@
+" ====================================================================
+" 1. THEME & COLOR INITIALIZATION (MUST BE FIRST)
+" ====================================================================
+set termguicolors
+set background=dark
+
+augroup CustomColors
+    autocmd!
+    " Keeps the background of your active line clean and transparent
+    autocmd ColorScheme * hi CursorLine ctermbg=NONE guibg=NONE
+    " Lights up your active line number in bold peach (Change hex here if wanted!)
+    autocmd ColorScheme * hi CursorLineNr ctermfg=14 guifg=#fab387 cterm=bold gui=bold
+    " Changes your text selection highlight to a smooth custom purple
+    autocmd ColorScheme * hi Visual guibg=#cba6f7 guifg=#11111b
+augroup END
+
+" Forcefully trigger syntax tracking and load the theme
+syntax on
+colorscheme catppuccin_mocha
+
+" ====================================================================
+" 2. GENERAL QUALITY OF LIFE SETTINGS
+" ====================================================================
+set clipboard=unnamedplus " Use system clipboard for copy/paste
+set mouse=a             " Enable mouse support for clicking and scrolling
+set history=1000        " Remember more commands and search history
+set noerrorbells        " Stop audio beeping
+set visualbell          " Use a visual flash instead
+set t_vb=               " Completely clear the flash for total silence
+
+" ====================================================================
+" 3. TABS & INDENTATION
+" ====================================================================
+set tabstop=4           " Number of visual spaces per TAB
+set softtabstop=4       " Number of spaces a TAB counts for while editing
+set shiftwidth=4        " Number of spaces to use for autoindent
+set expandtab           " Convert TABs to spaces
+set autoindent          " Copy indent from current line when starting new line
+
+" ====================================================================
+" 4. SMART AUTO-CLOSING BRACKETS
+" ====================================================================
+inoremap ( ()<Left>
+inoremap [ []<Left>
+inoremap { {}<Left>
+inoremap {<CR> {<CR>}<Esc>O
+inoremap " ""<Left>
+inoremap ' ''<Left>
+
+" ====================================================================
+" 5. CUSTOM KEYBOARD SHORTCUTS
+" ====================================================================
+let mapleader = ","
+nnoremap <leader>v :e ~/.vimrc<CR>
+
+" ====================================================================
+" 6. RICED STATUSLINE CUSTOMIZATION
+" ====================================================================
+set laststatus=2
+set statusline=
+set statusline+=%#Function#\ %F\        " File path highlighted in blue/purple
+set statusline+=%#Statement#%m\         " [+] modified flag in magenta
+set statusline+=%=                      " Push the rest to the right side
+set statusline+=%#Comment#\ %l/%L\      " Line counts in a subtle gray
+set statusline+=\ \                     " Add some spacing
+set statusline+=%#String#%{strftime('%I:%M\ %p')}\  " 12h Clock highlighted in green
+
+" ====================================================================
+" 7. UI VISUAL TRACKING
+" ====================================================================
+set cursorline
+set number
+set norelativenumber
