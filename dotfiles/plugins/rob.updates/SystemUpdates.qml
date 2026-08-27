@@ -86,10 +86,8 @@ BarWidget {
       active: root.updateCount > 0
       activeColor: "#ffd75f"
       interactive: false
-      slotSize: Style.bar.statusSlot
-      opticalSize: 12
-      horizontalMargin: 0
-      fontSize: 12
+      slotSize: Style.bar.iconSlot
+      opticalSize: Style.bar.iconCanvas
     }
 
     Text {
@@ -98,6 +96,7 @@ BarWidget {
       color: root.bar ? root.bar.barForeground : Color.foreground
       font.family: root.bar ? root.bar.fontFamily : Style.font.family
       font.pixelSize: Style.font.body
+      rightPadding: 5
       visible: root.updateCount >= 0
     }
   }
