@@ -3,3 +3,14 @@ border = "#1793d1 #999999 90deg"
 
 [hyprland]
 active-border = "#1793d1 #999999 90deg"
+
+[menu]
+background            = "#1E1E2E"
+background-alpha      = 0.85
+text                  = "#999999"
+border                = "hyprland.active-border"
+border-alpha          = 1.0
+selected-text         = "#1793d1"
+selected-border       = "#1793d1"
+selected-border-alpha = 1.0
+selected-border-width = 2
