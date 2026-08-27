@@ -49,7 +49,10 @@ confirm() {
 
 # guard: this only makes sense on Omarchy
 if [[ -z "${OMARCHY_PATH:-}" ]]; then
-  OMARCHY_PATH="$(command -v omarchy >/dev/null 2>&1 && dirname "$(dirname "$(readlink -f "$(command -v omarchy)")")" || true)"
+  OMARCHY_PATH=""
+  if omarchy_bin="$(command -v omarchy)"; then
+    OMARCHY_PATH="$(dirname "$(dirname "$(readlink -f "$omarchy_bin")")")"
+  fi
 fi
 if ! command -v omarchy >/dev/null 2>&1; then
   echo "omarchy CLI not found — this script targets an Omarchy install." >&2
