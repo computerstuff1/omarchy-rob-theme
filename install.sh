@@ -66,6 +66,42 @@ backup() {
   fi
 }
 
+# Clone the *current* built-in plugin into a fixed, portable id, then re-apply a
+# minimal patch. This keeps the custom look while inheriting any improvements
+# that land in the built-in on `omarchy update`, instead of freezing a vendored
+# copy that silently drifts. Internal ids (clonedFrom) are preserved so the
+# shell keeps routing IPC to the correct widget.
+clone_builtin() {
+  local src_id="$1" dst_id="$2" name="$3" patchfile="$4"
+  local src_dir
+  src_dir="$(omarchy-plugin-catalog 2>/dev/null | jq -r --arg id "$src_id" '.[] | select(.id == $id) | .sourceDir' | head -n1)"
+  if [[ -z "$src_dir" || "$src_dir" == "null" ]]; then
+    warn "cannot locate built-in \"$src_id\" — skipping $dst_id"
+    return 1
+  fi
+  local dst="$OMARCHY_CFG/plugins/$dst_id"
+  backup "plugins/$dst_id" "$dst"
+  mkdir -p "$OMARCHY_CFG/plugins"
+  rm -rf "$dst"
+  cp -a "$src_dir" "$dst"
+  if command -v jq >/dev/null 2>&1; then
+    jq --arg id "$dst_id" --arg name "$name" --arg src "$src_id" \
+      '.id = $id | .name = $name | if (.barWidget | type) == "object" then .barWidget.displayName = $name else . end | .omarchy = ((.omarchy // {}) + {clonedFrom: $src})' \
+      "$dst/manifest.json" > "$dst/manifest.json.tmp" && mv "$dst/manifest.json.tmp" "$dst/manifest.json"
+  else
+    sed -i "s/\"id\": \"$src_id\"/\"id\": \"$dst_id\"/" "$dst/manifest.json"
+  fi
+  if [[ -n "$patchfile" && -f "$REPO_DIR/$patchfile" ]]; then
+    if patch -p1 -d "$dst" < "$REPO_DIR/$patchfile" >/dev/null; then
+      ok "cloned $src_id -> $dst_id (patched)"
+    else
+      warn "patch $patchfile failed to apply — built-in \"$src_id\" changed upstream; re-base this patch"
+    fi
+  else
+    ok "cloned $src_id -> $dst_id"
+  fi
+}
+
 info "Omarchy Rob Theme installer"
 info "Backups (if any) go to: $BACKUP_ROOT"
 
@@ -148,18 +184,33 @@ cp "$REPO_DIR/dotfiles/fastfetch/Linux.png" "$FASTFETCH_LOGO_DIR/Linux.png"
 sed "s|@LOGO_PATH@|$FASTFETCH_LOGO_DIR/Linux.png|" \
   "$REPO_DIR/dotfiles/fastfetch/config.jsonc" > "$HOME/.config/fastfetch/config.jsonc"
 
-# bar plugins
-for p in rob.bar rob.clock rob.menu rob.menubutton rob.workspaces rob.updates; do
+# self-contained widgets ship as-is
+for p in rob.menubutton rob.workspaces rob.updates; do
   backup "plugins/$p" "$OMARCHY_CFG/plugins/$p"
   mkdir -p "$OMARCHY_CFG/plugins"
   rm -rf "$OMARCHY_CFG/plugins/$p"
   cp -r "$REPO_DIR/dotfiles/plugins/$p" "$OMARCHY_CFG/plugins/$p"
 done
+
+# de-forked built-ins (floating bar + seconds clock): clone the current
+# built-in, then re-apply a minimal patch so updates are inherited, not frozen.
+clone_builtin omarchy.bar   rob.bar   "My Bar"   patches/bar.patch
+clone_builtin omarchy.clock rob.clock "My Clock" patches/clock.patch
+
+# stash the patches somewhere stable so the post-update hook can re-apply them
+mkdir -p "$OMARCHY_CFG/rob-theme/patches"
+cp "$REPO_DIR/patches/bar.patch"   "$OMARCHY_CFG/rob-theme/patches/bar.patch"
+cp "$REPO_DIR/patches/clock.patch" "$OMARCHY_CFG/rob-theme/patches/clock.patch"
+
+# re-apply the de-forked look after every `omarchy update`
+if command -v omarchy >/dev/null 2>&1 && omarchy hook --help >/dev/null 2>&1; then
+  omarchy hook install post-update "$REPO_DIR/dotfiles/hooks/rob-theme-repatch.sh" || warn "could not install post-update hook"
+fi
 ok "dotfiles installed"
 
 info "Step 5/6 — registering widgets"
 omarchy-shell shell rescanPlugins || warn "rescan failed (is the shell running?)"
-for id in rob.bar rob.clock rob.menu rob.menubutton rob.workspaces rob.updates; do
+for id in rob.bar rob.clock rob.menubutton rob.workspaces rob.updates; do
   omarchy plugin enable "$id" 2>/dev/null || true
 done
 ok "widgets registered"

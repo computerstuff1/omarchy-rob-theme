@@ -1,0 +1,11 @@
+--- a/BarWidget.qml
++++ b/BarWidget.qml
+@@ -111,7 +111,7 @@
+ 
+   SystemClock {
+     id: clock
+-    precision: SystemClock.Minutes
++    precision: /ss|s\b/.test(root.activeFormat) ? SystemClock.Seconds : SystemClock.Minutes
+     onDateChanged: root.displayDate = date
+   }
+ 

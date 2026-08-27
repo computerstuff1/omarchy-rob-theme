@@ -32,7 +32,7 @@ BarWidget {
             if (mouseButton === Qt.RightButton)
                 root.bar.run("xdg-terminal-exec")
             else
-                root.bar.run("omarchy-shell shell toggle rob.menu '{\"menu\":\"root\"}'")
+                root.bar.run("omarchy-shell shell toggle omarchy.menu '{\"menu\":\"root\"}'")
         }
     }
 }

@@ -7,7 +7,7 @@
   "bar": {
     "position": "top",
     "transparent": false,
-    "centerAnchor": "omarchy.clock",
+    "centerAnchor": "rob.clock",
     "layout": {
       "left": [
         {
@@ -63,12 +63,5 @@
     },
     "id": "rob.bar"
   },
-  "plugins": [
-    {
-      "id": "rob.menu"
-    }
-  ],
-  "disabledPlugins": [
-    "omarchy.menu"
-  ]
+  "plugins": []
 }

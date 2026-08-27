@@ -1,0 +1,90 @@
+--- a/Bar.qml
++++ b/Bar.qml
+@@ -12,14 +12,14 @@
+   id: root
+ 
+   // The omarchy-shell host injects omarchyPath from OMARCHY_PATH.
+-  required property string omarchyPath
++  property string omarchyPath
+   // Injected by the host shell so bar slots can resolve enabled widgets.
+-  required property var barWidgetRegistry
++  property var barWidgetRegistry
+   // Injected by the host shell every time shell.json is reloaded. Holds the
+   // `bar:` subtree: position, centerAnchor, layout. The host owns file IO;
+   // the bar just renders whatever it's handed. The bar font follows the
+   // OS-level fontconfig monospace binding — it is not stored in shell.json.
+-  required property var barConfig
++  property var barConfig
+   // Injected by the host shell. Used for shell-wide actions such as opening
+   // settings and persisting inline widget state.
+   property var shell: null
+@@ -45,6 +45,11 @@
+   property bool useTransparentForeground: false
+   property bool transparent: false
+   property bool centerSectionHovered: false
++  // Floating-bar styling: the inset from the screen edge (margin) and the
++  // corner rounding (radius). Override via `bar.margin` / `bar.radius` in
++  // shell.json; set margin to 0 to disable the floating effect.
++  property int barMargin: 8
++  property int barRadius: 14
+   // One bar surface exists per monitor and each reports into this count, so a
+   // pointer crossing from one monitor's bar to another's stays counted however
+   // the enter and leave interleave. A single shared bool would be left false by
+@@ -358,6 +363,8 @@
+     position = normalizePosition(config.position)
+     setRequestedTransparency(config.transparent === true)
+     centerAnchor = Util.canonicalWidgetId(config.centerAnchor || "")
++    if (typeof config.margin === "number") barMargin = config.margin
++    if (typeof config.radius === "number") barRadius = config.radius
+ 
+     // layoutEntries feeds plain JS arrays to the module Repeaters, and QML
+     // cannot diff those: reassigning layoutConfig rebuilds every widget on
+@@ -1003,10 +1010,10 @@
+     }
+ 
+     margins {
+-      top: root.barHidden && root.position === "top" ? -root.barSize : 0
+-      bottom: root.barHidden && root.position === "bottom" ? -root.barSize : 0
+-      left: root.barHidden && root.position === "left" ? -root.barSize : 0
+-      right: root.barHidden && root.position === "right" ? -root.barSize : 0
++      top: root.barHidden && root.position === "top" ? -root.barSize : root.barMargin
++      bottom: root.barHidden && root.position === "bottom" ? -root.barSize : root.barMargin
++      left: root.barHidden && root.position === "left" ? -root.barSize : root.barMargin
++      right: root.barHidden && root.position === "right" ? -root.barSize : root.barMargin
+     }
+ 
+     anchors {
+@@ -1018,11 +1025,18 @@
+ 
+     implicitWidth: root.vertical ? root.barSize : 0
+     implicitHeight: root.vertical ? 0 : root.barSize
+-    color: root.transparent ? "transparent" : root.background
++    color: "transparent"
+     surfaceFormat.opaque: false
+     WlrLayershell.namespace: "omarchy-bar"
+     WlrLayershell.layer: WlrLayer.Top
+ 
++    BorderSurface {
++      anchors.fill: parent
++      color: root.transparent ? "transparent" : root.background
++      radius: Math.min(root.barRadius, root.barSize / 2)
++      borderSpec: Border.surfaceSpec("bar", "border", "#1793d1", 2)
++    }
++
+     Loader {
+       anchors.fill: parent
+       sourceComponent: root.vertical ? verticalBar : horizontalBar
+@@ -1629,10 +1643,10 @@
+ 
+       visible: opacity > 0
+       opacity: slot.panelOpen && !slot.dragSource ? 0.9 : 0
+-      color: Color.accent
++      color: "#1793d1"
+       radius: Math.min(width, height) / 2
+-      width: root.vertical ? Style.space(2) : slot.panelIndicatorExtent
+-      height: root.vertical ? slot.panelIndicatorExtent : Style.space(2)
++      width: root.vertical ? Style.space(3) : slot.panelIndicatorExtent
++      height: root.vertical ? slot.panelIndicatorExtent : Style.space(3)
+       // The mark sits on the module's inner edge — the one facing the
+       // desktop — so it underlines a top bar, overlines a bottom one, and
+       // points inward from a left or right one. It reads as pointing at the
