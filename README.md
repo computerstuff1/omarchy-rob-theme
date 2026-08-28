@@ -196,7 +196,7 @@ automatically after each `omarchy update` via the `post-update` hook.
   ```
 
   To change it, replace `theme/icons.theme` with the single colour you want and
-  re-apply.
+  re-apply Theme.
 - **Keyboard RGB:** `theme/keyboard.rgb` holds a hex color read *only* if your
   keyboard-RGB tooling consumes Omarchy's theme file — the script can't force it.
 
