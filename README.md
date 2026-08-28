@@ -6,6 +6,8 @@ gradient.
 
 <img width="1920" height="1080" alt="screenshot-2026-08-28_07-21-06" src="https://github.com/user-attachments/assets/3d85bb3e-3f1f-48e3-a0f0-2f661d286b5c" />
 
+<img width="1920" height="1080" alt="screenshot-2026-08-28_10-40-57" src="https://github.com/user-attachments/assets/f1857554-05b5-4f94-967e-8ef39d00ceb6" />
+
 
 ## Install
 
