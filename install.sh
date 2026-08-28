@@ -169,9 +169,12 @@ cp "$REPO_DIR/dotfiles/kitty/kitty.conf" "$HOME/.config/kitty/kitty.conf"
 # vim
 backup "vimrc" "$HOME/.vimrc"
 backup "vim/colors" "$HOME/.vim/colors" 2>/dev/null || true
+backup "vim/autoload" "$HOME/.vim/autoload"
 cp "$REPO_DIR/dotfiles/vim/vimrc" "$HOME/.vimrc"
 mkdir -p "$HOME/.vim/colors"
 cp "$REPO_DIR/dotfiles/vim/colors/catppuccin_mocha.vim" "$HOME/.vim/colors/catppuccin_mocha.vim"
+mkdir -p "$HOME/.vim/autoload"
+cp -r "$REPO_DIR/dotfiles/vim/autoload/." "$HOME/.vim/autoload/"
 
 # update-count helper
 backup "bin/system-update-count" "$OMARCHY_CFG/bin/system-update-count"
