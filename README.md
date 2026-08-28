@@ -43,7 +43,7 @@ omarchy-rob-theme/
 │   ├── colors.toml              Tokyo Night palette
 │   ├── shell.bar.toml           bar surface
 │   ├── shell.lock.toml          lock screen surface
-│   ├── icons.theme              Yaru-magenta
+│   ├── icons.theme              Yaru-red
 │   └── keyboard.rgb             ff00ff
 └── dotfiles/
     ├── shell.json               bar layout (left/center/right)
@@ -71,7 +71,7 @@ omarchy-rob-theme/
 | Blur | enabled (size 3, passes 2) |
 | Gaps | in 5 / out 10 |
 | Font | JetBrainsMono Nerd Font |
-| Icons | Yaru-magenta |
+| Icons | Yaru-red |
 | Wallpaper | `default.png` |
 
 ## Customizing
@@ -178,7 +178,25 @@ automatically after each `omarchy update` via the `post-update` hook.
 ### Wallpaper, icons, keyboard RGB
 
 - **Wallpaper:** replace `backgrounds/default.png` (any resolution; keep the name).
-- **Icons:** set the GTK icon theme name in `theme/icons.theme` (currently `Yaru-magenta`).
+- **Icons:** set the GTK icon theme name in `theme/icons.theme` (currently `Yaru-red`).
+  The file holds a single name — no comments — because Omarchy reads the whole
+  file as the icon-theme name. The available Yaru folder colours are:
+
+  ```
+  Yaru-red          ← current
+  # Yaru            (default orange)
+  # Yaru-blue
+  # Yaru-magenta
+  # Yaru-olive
+  # Yaru-prussiangreen
+  # Yaru-purple
+  # Yaru-sage
+  # Yaru-wartybrown
+  # Yaru-yellow
+  ```
+
+  To change it, replace `theme/icons.theme` with the single colour you want and
+  re-apply.
 - **Keyboard RGB:** `theme/keyboard.rgb` holds a hex color read *only* if your
   keyboard-RGB tooling consumes Omarchy's theme file — the script can't force it.
 
