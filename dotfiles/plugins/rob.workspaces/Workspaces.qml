@@ -74,7 +74,7 @@ BarWidget {
           radius: width / 2
           color: "transparent"
           border.width: 2
-          border.color: parent.focused ? Color.accent : "#999999"
+          border.color: parent.focused ? Color.accent : Color.menu.text
           opacity: (parent.focused || parent.occupied) ? 1 : 0
 
           Behavior on opacity {
