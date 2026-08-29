@@ -8,13 +8,6 @@ hl.config({
     gaps_out = 10,
     border_size = 4,
     layout = "master",
-
-    -- Correct gradient table syntax
-    ["col.active_border"] = {
-      colors = { "0xff1793d1", "0xff999999" },
-      angle = 90,
-    },
-    ["col.inactive_border"] = "0xaa595959",
   },
 })
 

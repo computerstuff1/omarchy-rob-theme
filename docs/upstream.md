@@ -25,7 +25,7 @@ corners, driven entirely by `shell.json`:
 **Rationale:** this is a popular, generally-useful bar behavior (now common in
 Waybar/Sway titles). Implementing it config-first means no one needs to fork
 the bar engine. The theme's gradient border is already theme-driven via
-`shell.toml [bar] border`; only the inset/radius needs core support.
+`theme/shell.bar.toml` (`[bar] border`); only the inset/radius needs core support.
 
 ## 2. Clock second-hand precision (`precision` opt-in)
 

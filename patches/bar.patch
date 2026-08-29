@@ -68,7 +68,7 @@
 +      anchors.fill: parent
 +      color: root.transparent ? "transparent" : root.background
 +      radius: Math.min(root.barRadius, root.barSize / 2)
-+      borderSpec: Border.surfaceSpec("bar", "border", "#1793d1", 2)
++      borderSpec: Border.surfaceSpec("bar", "border", Color.accent, 2)
 +    }
 +
      Loader {
@@ -79,7 +79,7 @@
        visible: opacity > 0
        opacity: slot.panelOpen && !slot.dragSource ? 0.9 : 0
 -      color: Color.accent
-+      color: "#1793d1"
++      color: Color.accent
        radius: Math.min(width, height) / 2
 -      width: root.vertical ? Style.space(2) : slot.panelIndicatorExtent
 -      height: root.vertical ? slot.panelIndicatorExtent : Style.space(2)

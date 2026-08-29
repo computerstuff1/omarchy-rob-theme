@@ -42,14 +42,14 @@ omarchy-rob-theme/
 │   └── clock.patch              seconds-ticking clock precision
 ├── docs/upstream.md             the two upstream feature requests
 ├── theme/                       the "Rob Theme"
-│   ├── colors.toml              Tokyo Night palette
-│   ├── shell.bar.toml           bar surface
+│   ├── colors.toml              Tokyo Night palette + accent/border gradient
+│   ├── shell.bar.toml           bar surface (background/text/size/border)
 │   ├── shell.lock.toml          lock screen surface
+│   ├── shell.menu.toml          menu surface
 │   ├── icons.theme              Yaru-red
 │   └── keyboard.rgb             ff00ff
 └── dotfiles/
     ├── shell.json               bar layout (left/center/right)
-    ├── shell.toml               [bar] + [hyprland] 90° border gradient
     ├── starship/starship.toml   two-line prompt
     ├── hypr/                    looknfeel (borders/gaps/master/blur), bindings, base flags
     ├── fontconfig/fonts.conf    JetBrainsMono Nerd Font
@@ -89,11 +89,11 @@ but individual changes apply faster with the commands listed.
 | Theme colors | `theme/colors.toml` | `~/.config/omarchy/themes/rob-theme/colors.toml` |
 | Bar surface | `theme/shell.bar.toml` | `~/.config/omarchy/themes/rob-theme/shell.bar.toml` |
 | Lock screen surface | `theme/shell.lock.toml` | `~/.config/omarchy/themes/rob-theme/shell.lock.toml` |
+| Menu surface | `theme/shell.menu.toml` | `~/.config/omarchy/themes/rob-theme/shell.menu.toml` |
 | Icon theme | `theme/icons.theme` | `~/.config/omarchy/themes/rob-theme/icons.theme` |
 | Keyboard RGB | `theme/keyboard.rgb` | `~/.config/omarchy/themes/rob-theme/keyboard.rgb` |
 | Wallpaper | `backgrounds/default.png` | `~/.config/omarchy/themes/rob-theme/backgrounds/default.png` |
 | Bar layout / widget placement | `dotfiles/shell.json` | `~/.config/omarchy/shell.json` |
-| Border gradient, menu style | `dotfiles/shell.toml` | `~/.config/omarchy/shell.toml` |
 | Shell prompt | `dotfiles/starship/starship.toml` | `~/.config/starship.toml` |
 | Window look (gaps/borders/blur/master) | `dotfiles/hypr/looknfeel.lua` | `~/.config/hypr/looknfeel.lua` |
 | Key bindings | `dotfiles/hypr/bindings.lua` | `~/.config/hypr/bindings.lua` |
@@ -113,8 +113,10 @@ but individual changes apply faster with the commands listed.
 The palette is **Tokyo Night**, accent **`#1793d1`**, and lives in
 `theme/colors.toml`. Change `accent` or any named color there, and everything
 that reads Omarchy's theme colors (bar, terminals, prompt via `colors.toml`)
-follows. The window/bar **border gradient** and **menu** styling are separate,
-in `dotfiles/shell.toml` (`[hyprland] active-border` / `[bar] border` / `[menu]`).
+follows. The window/bar **border gradient** is also defined here (`accent` +
+`hyprland_active_border`), so it drives Hyprland window borders and the shell
+surfaces together. The **menu** styling is a per-section override in
+`theme/shell.menu.toml`.
 
 > Note: terminal *colors* come from the theme dynamically — the ghostty/kitty
 > configs `include` Omarchy's generated theme file (`~/.local/state/omarchy/current/theme/{ghostty,kitty}.conf`).
@@ -145,8 +147,8 @@ see [`docs/upstream.md`](docs/upstream.md) for the full diff and rationale.
 
 - **Floating bar** inset/rounding: add `"margin": 8` / `"radius": 14` to the
   `bar` object in `dotfiles/shell.json` (the patched `rob.bar` reads these).
-- **Gradient surface / indicator thickness** are literal values inside
-  `patches/bar.patch` (search `#1793d1`); edit the hunk and re-apply.
+- **Gradient surface / indicator thickness** ship inside `patches/bar.patch`; the
+  surface follows `Color.accent`, so recolor it in `theme/colors.toml`.
 
 **Re-apply:** `./install.sh` (re-clones + re-patches), or the same thing runs
 automatically after each `omarchy update` via the `post-update` hook.
@@ -224,8 +226,8 @@ hyprctl reload
 
 The theme is built to survive `omarchy update` and track upstream improvements:
 
-- **Everything lives in `~/.config/`** (theme, `shell.json`, `shell.toml`,
-  `hypr/`, terminals, starship, fastfetch, vim) — Omarchy never overwrites user
+- **Everything lives in `~/.config/`** (theme, `shell.json`, `hypr/`,
+  terminals, starship, fastfetch, vim) — Omarchy never overwrites user
   config, so these never break on update.
 - **No vendored built-in forks.** Instead of shipping stale copies of the bar
   engine and clock, `install.sh` clones the *current* built-in

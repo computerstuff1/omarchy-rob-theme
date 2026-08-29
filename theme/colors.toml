@@ -1,8 +1,11 @@
 mode = "dark"
 
-accent = "#7aa2f7"
+accent = "#1793d1"
 selection = "#292e42"
 muted = "#414868"
+
+hyprland_active_border = "#1793d1 #999999 90deg"
+hyprland_inactive_border = "rgba(595959aa)"
 
 background = "#1a1b26"
 dark_background = "#13141c"

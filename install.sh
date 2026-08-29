@@ -123,6 +123,7 @@ mkdir -p "$THEME_DIR/backgrounds"
 cp "$REPO_DIR/theme/colors.toml"      "$THEME_DIR/colors.toml"
 cp "$REPO_DIR/theme/shell.bar.toml"    "$THEME_DIR/shell.bar.toml"
 cp "$REPO_DIR/theme/shell.lock.toml"   "$THEME_DIR/shell.lock.toml"
+cp "$REPO_DIR/theme/shell.menu.toml"   "$THEME_DIR/shell.menu.toml"
 cp "$REPO_DIR/theme/icons.theme"       "$THEME_DIR/icons.theme"
 cp "$REPO_DIR/theme/keyboard.rgb"      "$THEME_DIR/keyboard.rgb"
 cp "$REPO_DIR/backgrounds/default.png" "$THEME_DIR/backgrounds/default.png"
@@ -133,11 +134,9 @@ omarchy theme set "$THEME_NAME"
 
 info "Step 4/6 — installing dotfiles"
 
-# bar layout + shell gradient overrides
+# bar layout
 backup "dotfiles/shell.json" "$OMARCHY_CFG/shell.json"
-backup "dotfiles/shell.toml" "$OMARCHY_CFG/shell.toml"
 cp "$REPO_DIR/dotfiles/shell.json" "$OMARCHY_CFG/shell.json"
-cp "$REPO_DIR/dotfiles/shell.toml" "$OMARCHY_CFG/shell.toml"
 
 # starship prompt
 backup "dotfiles/starship.toml" "$HOME/.config/starship.toml"
