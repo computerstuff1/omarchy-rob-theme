@@ -1,5 +1,5 @@
 [menu]
-background            = "#1E1E2E"
+background            = "#1a1b26"
 background-alpha      = 0.85
 text                  = "#999999"
 border                = "hyprland.active-border"
