@@ -199,7 +199,7 @@ do_uninstall() {
   local rels=(
     themes/rob-theme dotfiles/shell.json dotfiles/starship.toml
     hypr/looknfeel.lua hypr/bindings.lua hypr/hyprland.lua
-    fontconfig/fonts.conf ghostty/config kitty/kitty.conf
+    fontconfig/fonts.conf ghostty/config kitty/kitty.conf kitty/current-theme.conf
     vimrc vim/colors vim/autoload
     bin/system-update-count fastfetch/config.jsonc fastfetch/Linux.png
     plugins/rob.menubutton plugins/rob.workspaces plugins/rob.updates
@@ -246,6 +246,11 @@ if (( INSTALL_DEPS )); then
   info "Step 1/6 — installing dependencies"
   ensure_pkg checkupdates           omarchy pkg add pacman-contrib || warn "pacman-contrib install failed (update count will be repo-only)"
   ensure_pkg jq                     omarchy pkg add jq              || warn "jq install failed (floating bar/clock clones will be skipped)"
+  if omarchy pkg present ttf-jetbrains-mono-nerd-basic; then
+    ok "JetBrainsMono Nerd Font already installed"
+  else
+    omarchy pkg add ttf-jetbrains-mono-nerd-basic || warn "JetBrainsMono Nerd Font install failed (fallback font will be used)"
+  fi
   if [[ -d /usr/share/icons/Yaru-red ]]; then
     ok "Yaru-red icons already installed"
   else
@@ -266,7 +271,7 @@ cp "$REPO_DIR/theme/shell.bar.toml"    "$THEME_DIR/shell.bar.toml"
 cp "$REPO_DIR/theme/shell.lock.toml"   "$THEME_DIR/shell.lock.toml"
 cp "$REPO_DIR/theme/shell.menu.toml"   "$THEME_DIR/shell.menu.toml"
 cp "$REPO_DIR/theme/icons.theme"       "$THEME_DIR/icons.theme"
-cp "$REPO_DIR/theme/keyboard.rgb"      "$THEME_DIR/keyboard.rgb"
+rm -f "$THEME_DIR/keyboard.rgb"
 cp "$REPO_DIR/backgrounds/default.png" "$THEME_DIR/backgrounds/default.png"
 ok "theme staged at $THEME_DIR"
 
@@ -305,10 +310,12 @@ backup "ghostty/config" "$HOME/.config/ghostty/config" "$REPO_DIR/dotfiles/ghost
 mkdir -p "$HOME/.config/ghostty"
 cp "$REPO_DIR/dotfiles/ghostty/config" "$HOME/.config/ghostty/config"
 
-# kitty terminal
+# kitty terminal (Catppuccin palette via current-theme.conf overrides the theme)
 backup "kitty/kitty.conf" "$HOME/.config/kitty/kitty.conf" "$REPO_DIR/dotfiles/kitty/kitty.conf"
+backup "kitty/current-theme.conf" "$HOME/.config/kitty/current-theme.conf" "$REPO_DIR/dotfiles/kitty/current-theme.conf"
 mkdir -p "$HOME/.config/kitty"
 cp "$REPO_DIR/dotfiles/kitty/kitty.conf" "$HOME/.config/kitty/kitty.conf"
+cp "$REPO_DIR/dotfiles/kitty/current-theme.conf" "$HOME/.config/kitty/current-theme.conf"
 
 # vim
 backup "vimrc" "$HOME/.vimrc" "$REPO_DIR/dotfiles/vim/vimrc"

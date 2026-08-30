@@ -19,7 +19,7 @@ cd omarchy-rob-theme
 
 That's it. The script:
 
-1. Installs dependencies (`pacman-contrib`, `yaru-icon-theme`, `yay` — best-effort)
+1. Installs dependencies (`pacman-contrib`, `jq`, `ttf-jetbrains-mono-nerd-basic`, `yaru-icon-theme`, `yay` — best-effort)
 2. Stages the theme into `~/.config/omarchy/themes/rob-theme/`
 3. Applies it with `omarchy theme set "Rob Theme"`
 4. Installs the bar layout, plugins, Hyprland look, starship, ghostty, fastfetch, vim, and the update-count helper
@@ -36,8 +36,9 @@ That's it. The script:
 | `--restore=<ts>` | Restore a specific timestamped backup from `~/.cache/omarchy-rob-theme/backup/<ts>` |
 
 Dependencies are installed only if missing: `pacman-contrib` (for `checkupdates`),
-`jq` (for the de-forked clones), `yaru-icon-theme` (icons), and your chosen AUR
-helper (`yay` or `paru`) for the AUR update count.
+`jq` (for the de-forked clones), `ttf-jetbrains-mono-nerd-basic` (the monospace
+font), `yaru-icon-theme` (icons), and your chosen AUR helper (`yay` or `paru`)
+for the AUR update count.
 
 **Re-runnable:** safe to run any time. The first run saves timestamped backups of
 anything it overwrites under `~/.cache/omarchy-rob-theme/backup/<timestamp>/`;
@@ -63,8 +64,7 @@ omarchy-rob-theme/
 │   ├── shell.bar.toml           bar surface (background/text/size/border)
 │   ├── shell.lock.toml          lock screen surface
 │   ├── shell.menu.toml          menu surface
-│   ├── icons.theme              Yaru-red
-│   └── keyboard.rgb             ff00ff
+│   └── icons.theme              Yaru-red
 └── dotfiles/
     ├── shell.json               bar layout (left/center/right)
     ├── starship/starship.toml   two-line prompt
@@ -72,6 +72,7 @@ omarchy-rob-theme/
     ├── fontconfig/fonts.conf    JetBrainsMono Nerd Font
     ├── ghostty/config           terminal font/size/padding/keybinds
     ├── kitty/kitty.conf         terminal font/padding/opacity/tab style
+    ├── kitty/current-theme.conf Catppuccin-Mocha palette (overrides the theme)
     ├── fastfetch/               config + custom Linux logo (path auto-rewritten)
     ├── plugins/rob.{menubutton,workspaces,updates}   self-contained bar widgets
     ├── hooks/rob-theme-repatch.sh                    post-update hook
@@ -108,7 +109,6 @@ but individual changes apply faster with the commands listed.
 | Lock screen surface | `theme/shell.lock.toml` | `~/.config/omarchy/themes/rob-theme/shell.lock.toml` |
 | Menu surface | `theme/shell.menu.toml` | `~/.config/omarchy/themes/rob-theme/shell.menu.toml` |
 | Icon theme | `theme/icons.theme` | `~/.config/omarchy/themes/rob-theme/icons.theme` |
-| Keyboard RGB | `theme/keyboard.rgb` | `~/.config/omarchy/themes/rob-theme/keyboard.rgb` |
 | Wallpaper | `backgrounds/default.png` | `~/.config/omarchy/themes/rob-theme/backgrounds/default.png` |
 | Bar layout / widget placement | `dotfiles/shell.json` | `~/.config/omarchy/shell.json` |
 | Shell prompt | `dotfiles/starship/starship.toml` | `~/.config/starship.toml` |
@@ -117,6 +117,7 @@ but individual changes apply faster with the commands listed.
 | Hyprland load order / flags | `dotfiles/hypr/hyprland.lua` | `~/.config/hypr/hyprland.lua` |
 | Terminal font/padding/keybinds (ghostty) | `dotfiles/ghostty/config` | `~/.config/ghostty/config` |
 | Terminal font/padding/opacity (kitty) | `dotfiles/kitty/kitty.conf` | `~/.config/kitty/kitty.conf` |
+| Kitty palette (Catppuccin) | `dotfiles/kitty/current-theme.conf` | `~/.config/kitty/current-theme.conf` |
 | Monospace font | `dotfiles/fontconfig/fonts.conf` | `~/.config/fontconfig/fonts.conf` |
 | fastfetch | `dotfiles/fastfetch/config.jsonc` | `~/.config/fastfetch/config.jsonc` |
 | fastfetch logo | `dotfiles/fastfetch/Linux.png` | `~/.local/share/omarchy-rob-theme/Linux.png` |
@@ -135,9 +136,11 @@ follows. The window/bar **border gradient** is also defined here (`accent` +
 surfaces together. The **menu** styling is a per-section override in
 `theme/shell.menu.toml`.
 
-> Note: terminal *colors* come from the theme dynamically — the ghostty/kitty
-> configs `include` Omarchy's generated theme file (`~/.local/state/omarchy/current/theme/{ghostty,kitty}.conf`).
-> To recolor terminals, edit `theme/colors.toml`, not the terminal configs.
+> Note: **ghostty** colors come from the theme dynamically — its config
+> `include`s Omarchy's generated theme file (`~/.local/state/omarchy/current/theme/ghostty.conf`).
+> To recolor ghostty, edit `theme/colors.toml`. **kitty**, meanwhile, uses a
+> bundled **Catppuccin Mocha** palette (`dotfiles/kitty/current-theme.conf`) that
+> overrides the theme, so recolouring kitty means editing that file instead.
 
 **Re-apply:** `omarchy theme set "Rob Theme"`.
 
@@ -182,7 +185,8 @@ automatically after each `omarchy update` via the `post-update` hook.
 ### Terminals, prompt, font, vim, fastfetch
 
 - **Ghostty:** `dotfiles/ghostty/config` (font, size, padding, keybinds).
-- **Kitty:** `dotfiles/kitty/kitty.conf` (font, padding, opacity, tab style).
+- **Kitty:** `dotfiles/kitty/kitty.conf` (font, padding, opacity, tab style) and
+  `dotfiles/kitty/current-theme.conf` (Catppuccin Mocha palette).
 - **Prompt:** `dotfiles/starship/starship.toml` (two-line layout, module colors).
 - **Font:** the theme uses `JetBrainsMono Nerd Font`. Change it in
   `dotfiles/fontconfig/fonts.conf` (system monospace) *and* the ghostty/kitty
@@ -196,7 +200,7 @@ automatically after each `omarchy update` via the `post-update` hook.
 **Re-apply:** terminals → `omarchy restart terminal`; starship/vim/fastfetch →
   new shell / next launch. `./install.sh` re-stages any of these.
 
-### Wallpaper, icons, keyboard RGB
+### Wallpaper & icons
 
 - **Wallpaper:** replace `backgrounds/default.png` (any resolution; keep the name).
 - **Icons:** set the GTK icon theme name in `theme/icons.theme` (currently `Yaru-red`).
@@ -218,8 +222,6 @@ automatically after each `omarchy update` via the `post-update` hook.
 
   To change it, replace `theme/icons.theme` with the single colour you want and
   re-apply Theme.
-- **Keyboard RGB:** `theme/keyboard.rgb` holds a hex color read *only* if your
-  keyboard-RGB tooling consumes Omarchy's theme file — the script can't force it.
 
 **Re-apply:** `omarchy theme set "Rob Theme"` (then `omarchy theme bg next` to
 cycle wallpapers).
@@ -266,8 +268,6 @@ When they land, `patches/` and the hook disappear entirely.
 
 ## Notes
 
-- `keyboard.rgb` only takes effect if your keyboard-RGB tool reads Omarchy's theme
-  file; the script can't force it.
 - fastfetch's logo is bundled and its path is rewritten at install, so there are no
   machine-specific absolute paths in this repo.
 - The update-count widget (`rob.updates`) reads `checkupdates` and `yay`/`paru`,
