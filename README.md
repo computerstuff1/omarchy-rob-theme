@@ -87,7 +87,8 @@ omarchy-rob-theme/
 | Accent | `#1793d1` |
 | Border gradient | `#1793d1 → #999999 @ 90°` (bar, popups, notifications, windows) |
 | Palette | Tokyo Night (`background #1a1b26`, `foreground #a9b1d6`) |
-| Window border | 4px, rounded 8, master layout (`mfact 0.55`, left) |
+| Window layout | **master/stack** — `master` layout (`mfact 0.55`, left), new windows stack as slaves |
+| Window border | 4px, rounded 8 |
 | Blur | enabled (size 3, passes 2) |
 | Gaps | in 5 / out 10 |
 | Font | JetBrainsMono Nerd Font |
@@ -175,9 +176,16 @@ automatically after each `omarchy update` via the `post-update` hook.
 
 ### Hyprland look & feel
 
-- Gaps, borders, rounded corners, blur, master layout: `dotfiles/hypr/looknfeel.lua`.
+- Gaps, borders, rounded corners, blur, master/stack layout: `dotfiles/hypr/looknfeel.lua`.
 - Key bindings (bind/unbind): `dotfiles/hypr/bindings.lua`.
 - Load order / flags / which `hypr.*` files load first: `dotfiles/hypr/hyprland.lua`.
+
+The theme uses Hyprland's **master/stack** layout (`master`) — the master window
+holds the left-hand 55% (`mfact 0.55`), and every new window opens as a stacked
+slave (`new_status = "slave"`). It's set globally in `looknfeel.lua`, so it's the
+default on all workspaces. `SUPER+L` re-applies master layout on the active
+workspace (a recover net if you've switched it away), bound in
+`bindings.lua` via the `setlayout` dispatcher.
 
 **Re-apply:** Hyprland auto-reloads on save; verify with `hyprctl reload` and
 `hyprctl configerrors`.
