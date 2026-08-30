@@ -184,8 +184,8 @@ The theme uses Hyprland's **master/stack** layout (`master`) — the master wind
 holds the left-hand 55% (`mfact 0.55`), and every new window opens as a stacked
 slave (`new_status = "slave"`). It's set globally in `looknfeel.lua`, so it's the
 default on all workspaces. `SUPER+L` re-applies master layout on the active
-workspace (a recover net if you've switched it away), bound in
-`bindings.lua` via the `setlayout` dispatcher.
+workspace (a recover net if you've switched it away) via a workspace rule on
+the focused workspace, bound in `bindings.lua`.
 
 **Re-apply:** Hyprland auto-reloads on save; verify with `hyprctl reload` and
 `hyprctl configerrors`.

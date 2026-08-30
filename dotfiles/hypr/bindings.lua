@@ -29,4 +29,9 @@
 -- o.bind("SUPER + PERIOD", nil, "omarchy-shell shell toggle omarchy.emojis")
 
 hl.unbind("SUPER + L")
-o.bind("SUPER + L", "Set master layout", hl.dsp.layout("setlayout", "master"))
+o.bind("SUPER + L", "Set master layout", function()
+  local ws = hl.get_active_workspace()
+  if ws then
+    hl.workspace_rule({ workspace = tostring(ws.id), layout = "master" })
+  end
+end)
