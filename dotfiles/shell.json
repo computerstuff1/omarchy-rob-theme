@@ -7,6 +7,8 @@
   "bar": {
     "position": "top",
     "transparent": false,
+    "margin": 8,
+    "radius": 14,
     "centerAnchor": "rob.clock",
     "layout": {
       "left": [
