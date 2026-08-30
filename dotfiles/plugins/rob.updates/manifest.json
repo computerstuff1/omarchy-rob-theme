@@ -3,7 +3,7 @@
   "id": "rob.updates",
   "name": "System Updates",
   "version": "1.0.0",
-  "author": "rob",
+  "author": "Rob",
   "description": "Shows a pacman icon with the number of pending system updates (repos + AUR)",
   "kinds": [
     "bar-widget"

@@ -30,3 +30,9 @@ jobs:
             install.sh \
             dotfiles/bin/system-update-count \
             dotfiles/hooks/rob-theme-repatch.sh
+
+      - name: Bash syntax check
+        run: |
+          bash -n install.sh \
+            dotfiles/bin/system-update-count \
+            dotfiles/hooks/rob-theme-repatch.sh

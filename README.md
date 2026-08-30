@@ -25,11 +25,28 @@ That's it. The script:
 4. Installs the bar layout, plugins, Hyprland look, starship, ghostty, fastfetch, vim, and the update-count helper
 5. Registers the bar widgets, installs a `post-update` hook, and reloads the shell + Hyprland
 
-**Options:** `--yes` (non-interactive) and `--no-deps` (skip package installs).
+**Options:**
+
+| Flag | Effect |
+|---|---|
+| `--yes` | Non-interactive; skip confirmations |
+| `--no-deps` | Skip the package-install step entirely |
+| `--aur-helper=yay\|paru\|none` | Choose the AUR helper (default `yay`; `none` skips it) |
+| `--uninstall` | Restore the most recent backup and remove the theme's changes |
+| `--restore=<ts>` | Restore a specific timestamped backup from `~/.cache/omarchy-rob-theme/backup/<ts>` |
+
+Dependencies are installed only if missing: `pacman-contrib` (for `checkupdates`),
+`jq` (for the de-forked clones), `yaru-icon-theme` (icons), and your chosen AUR
+helper (`yay` or `paru`) for the AUR update count.
 
 **Re-runnable:** safe to run any time. The first run saves timestamped backups of
 anything it overwrites under `~/.cache/omarchy-rob-theme/backup/<timestamp>/`;
-later runs just refresh to this repo's state. It never deletes personal settings.
+later runs just refresh to this repo's state, only backing up files that actually
+changed, and keep the newest 5 backups. It never deletes personal settings.
+
+**Undo:** run `./install.sh --uninstall` to restore the most recent backup and
+remove the theme's changes (hooks, clones, widget registrations), or
+`./install.sh --restore=<timestamp>` to go back to an earlier state.
 
 ## What's inside
 
@@ -134,7 +151,7 @@ Built-in widgets use `omarchy.*` ids; the theme's custom ones are
 - Change the clock format on the `omarchy.clock` entry's `format` field
   (the `rob.clock` clone ticks seconds whenever `ss`/`s` is present).
 - `rob.updates` shows repo+AUR counts from `dotfiles/bin/system-update-count`
-  (needs `checkupdates`/`yay`). Tweak the poll interval in
+  (needs `checkupdates` and `yay` or `paru`). Tweak the poll interval in
   `dotfiles/plugins/rob.updates/SystemUpdates.qml`.
 
 **Re-apply:** `shell.json` hot-reloads on save; widget code under
@@ -253,8 +270,8 @@ When they land, `patches/` and the hook disappear entirely.
   file; the script can't force it.
 - fastfetch's logo is bundled and its path is rewritten at install, so there are no
   machine-specific absolute paths in this repo.
-- The update-count widget (`rob.updates`) reads `checkupdates`/`yay`, so it needs
-  `pacman-contrib` and `yay`; `omarchy.system-update` is the dependency-free
-  alternative if you don't want the number.
+- The update-count widget (`rob.updates`) reads `checkupdates` and `yay`/`paru`,
+  so it needs `pacman-contrib` and an AUR helper; `omarchy.system-update` is the
+  dependency-free alternative if you don't want the number.
 - Non-look personal settings (git identity, monitors, input) are intentionally not
   included.

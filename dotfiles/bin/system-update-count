@@ -7,8 +7,15 @@ set -uo pipefail
 repo=$(timeout 60 checkupdates --nocolor 2>/dev/null | wc -l)
 
 aur=0
-if command -v yay >/dev/null 2>&1; then
-  aur=$(timeout 60 yay -Qua --quiet 2>/dev/null | wc -l)
-fi
+for helper in yay paru; do
+  if command -v "$helper" >/dev/null 2>&1; then
+    if [[ "$helper" == "yay" ]]; then
+      aur=$(timeout 60 yay -Qua --quiet 2>/dev/null | wc -l)
+    else
+      aur=$(timeout 60 paru -Qua 2>/dev/null | wc -l)
+    fi
+    break
+  fi
+done
 
 echo $(( repo + aur ))
