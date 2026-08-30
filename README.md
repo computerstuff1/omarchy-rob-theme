@@ -1,6 +1,6 @@
 # omarchy-rob-theme
 
-TRY IN VM, One-command install of my **Omarchy** desktop — a dark "Rob Theme" (Tokyo Night
+TRY IN VM, NOTE: Currently requires the kitty terminal and standardvim to be installed separately being that the install.sh doesn't do those two things atm, One-command install of my **Omarchy** desktop — a dark "Rob Theme" (Tokyo Night
 palette) with a blue `#1793d1` accent and a matching shell, bar, and window-border
 gradient.
 
