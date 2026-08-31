@@ -1,6 +1,6 @@
 # omarchy-rob-theme
 
-TRY IN VM, NOTE: Currently requires the kitty terminal and standard vim to be installed separately being that the install.sh doesn't do those two things atm, One-command install of my **Omarchy** desktop — a dark "Rob Theme" (Tokyo Night
+TRY IN VM. One-command install of my **Omarchy** desktop — a dark "Rob Theme" (Tokyo Night
 palette) with a blue `#1793d1` accent and a matching shell, bar, and window-border
 gradient.
 
@@ -19,10 +19,10 @@ cd omarchy-rob-theme
 
 That's it. The script:
 
-1. Installs dependencies (`pacman-contrib`, `jq`, `ttf-jetbrains-mono-nerd-basic`, `yaru-icon-theme`, `yay` — best-effort)
+1. Installs dependencies (`pacman-contrib`, `jq`, `ttf-jetbrains-mono-nerd-basic`, `yaru-icon-theme`, `yay`, `vim`, `kitty` — best-effort)
 2. Stages the theme into `~/.config/omarchy/themes/rob-theme/`
 3. Applies it with `omarchy theme set "Rob Theme"`
-4. Installs the bar layout, plugins, Hyprland look, starship, ghostty, fastfetch, vim, and the update-count helper
+4. Installs the bar layout, plugins, Hyprland look, starship, kitty, fastfetch, vim, and the update-count helper
 5. Registers the bar widgets, installs a `post-update` hook, and reloads the shell + Hyprland
 
 **Options:**
@@ -37,8 +37,8 @@ That's it. The script:
 
 Dependencies are installed only if missing: `pacman-contrib` (for `checkupdates`),
 `jq` (for the de-forked clones), `ttf-jetbrains-mono-nerd-basic` (the monospace
-font), `yaru-icon-theme` (icons), and your chosen AUR helper (`yay` or `paru`)
-for the AUR update count.
+font), `yaru-icon-theme` (icons), `vim` and `kitty` (the editor and terminal),
+and your chosen AUR helper (`yay` or `paru`) for the AUR update count.
 
 **Re-runnable:** safe to run any time. The first run saves timestamped backups of
 anything it overwrites under `~/.cache/omarchy-rob-theme/backup/<timestamp>/`;
@@ -70,7 +70,6 @@ omarchy-rob-theme/
     ├── starship/starship.toml   two-line prompt
     ├── hypr/                    looknfeel (borders/gaps/master/blur), bindings, base flags
     ├── fontconfig/fonts.conf    JetBrainsMono Nerd Font
-    ├── ghostty/config           terminal font/size/padding/keybinds
     ├── kitty/kitty.conf         terminal font/padding/opacity/tab style
     ├── kitty/current-theme.conf Catppuccin-Mocha palette (overrides the theme)
     ├── fastfetch/               config + custom Linux logo (path auto-rewritten)
@@ -116,7 +115,6 @@ but individual changes apply faster with the commands listed.
 | Window look (gaps/borders/blur/master) | `dotfiles/hypr/looknfeel.lua` | `~/.config/hypr/looknfeel.lua` |
 | Key bindings | `dotfiles/hypr/bindings.lua` | `~/.config/hypr/bindings.lua` |
 | Hyprland load order / flags | `dotfiles/hypr/hyprland.lua` | `~/.config/hypr/hyprland.lua` |
-| Terminal font/padding/keybinds (ghostty) | `dotfiles/ghostty/config` | `~/.config/ghostty/config` |
 | Terminal font/padding/opacity (kitty) | `dotfiles/kitty/kitty.conf` | `~/.config/kitty/kitty.conf` |
 | Kitty palette (Catppuccin) | `dotfiles/kitty/current-theme.conf` | `~/.config/kitty/current-theme.conf` |
 | Monospace font | `dotfiles/fontconfig/fonts.conf` | `~/.config/fontconfig/fonts.conf` |
@@ -137,11 +135,9 @@ follows. The window/bar **border gradient** is also defined here (`accent` +
 surfaces together. The **menu** styling is a per-section override in
 `theme/shell.menu.toml`.
 
-> Note: **ghostty** colors come from the theme dynamically — its config
-> `include`s Omarchy's generated theme file (`~/.local/state/omarchy/current/theme/ghostty.conf`).
-> To recolor ghostty, edit `theme/colors.toml`. **kitty**, meanwhile, uses a
-> bundled **Catppuccin Mocha** palette (`dotfiles/kitty/current-theme.conf`) that
-> overrides the theme, so recolouring kitty means editing that file instead.
+> Note: **kitty** uses a bundled **Catppuccin Mocha** palette
+> (`dotfiles/kitty/current-theme.conf`) that overrides the theme, so recolouring
+> kitty means editing that file instead of `theme/colors.toml`.
 
 **Re-apply:** `omarchy theme set "Rob Theme"`.
 
@@ -192,13 +188,12 @@ the focused workspace, bound in `bindings.lua`.
 
 ### Terminals, prompt, font, vim, fastfetch
 
-- **Ghostty:** `dotfiles/ghostty/config` (font, size, padding, keybinds).
 - **Kitty:** `dotfiles/kitty/kitty.conf` (font, padding, opacity, tab style) and
   `dotfiles/kitty/current-theme.conf` (Catppuccin Mocha palette).
 - **Prompt:** `dotfiles/starship/starship.toml` (two-line layout, module colors).
 - **Font:** the theme uses `JetBrainsMono Nerd Font`. Change it in
-  `dotfiles/fontconfig/fonts.conf` (system monospace) *and* the ghostty/kitty
-  configs (or run `omarchy font set <name>` instead; `omarchy font list`).
+  `dotfiles/fontconfig/fonts.conf` (system monospace) *and* the kitty config
+  (or run `omarchy font set <name>` instead; `omarchy font list`).
 - **Vim:** `dotfiles/vim/vimrc` (statusline, indentation, colorscheme call) and
   `dotfiles/vim/colors/catppuccin_mocha.vim`.
 - **fastfetch:** `dotfiles/fastfetch/config.jsonc` — note the logo `source` is

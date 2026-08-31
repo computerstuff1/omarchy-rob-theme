@@ -159,7 +159,6 @@ target_for() {
     dotfiles/starship.toml)     printf '%s\n' "$HOME/.config/starship.toml" ;;
     hypr/*)                     printf '%s\n' "$HOME/.config/$rel" ;;
     fontconfig/*)               printf '%s\n' "$HOME/.config/$rel" ;;
-    ghostty/*)                  printf '%s\n' "$HOME/.config/$rel" ;;
     kitty/*)                    printf '%s\n' "$HOME/.config/$rel" ;;
     vimrc)                      printf '%s\n' "$HOME/.vimrc" ;;
     vim/colors)                 printf '%s\n' "$HOME/.vim/colors" ;;
@@ -199,7 +198,7 @@ do_uninstall() {
   local rels=(
     themes/rob-theme dotfiles/shell.json dotfiles/starship.toml
     hypr/looknfeel.lua hypr/bindings.lua hypr/hyprland.lua
-    fontconfig/fonts.conf ghostty/config kitty/kitty.conf kitty/current-theme.conf
+    fontconfig/fonts.conf kitty/kitty.conf kitty/current-theme.conf
     vimrc vim/colors vim/autoload
     bin/system-update-count fastfetch/config.jsonc fastfetch/Linux.png
     plugins/rob.menubutton plugins/rob.workspaces plugins/rob.updates
@@ -246,6 +245,8 @@ if (( INSTALL_DEPS )); then
   info "Step 1/6 — installing dependencies"
   ensure_pkg checkupdates           omarchy pkg add pacman-contrib || warn "pacman-contrib install failed (update count will be repo-only)"
   ensure_pkg jq                     omarchy pkg add jq              || warn "jq install failed (floating bar/clock clones will be skipped)"
+  ensure_pkg vim                    omarchy pkg add vim             || warn "vim install failed"
+  ensure_pkg kitty                  omarchy pkg add kitty           || warn "kitty install failed"
   if omarchy pkg present ttf-jetbrains-mono-nerd-basic; then
     ok "JetBrainsMono Nerd Font already installed"
   else
@@ -304,11 +305,6 @@ done
 backup "fontconfig/fonts.conf" "$HOME/.config/fontconfig/fonts.conf" "$REPO_DIR/dotfiles/fontconfig/fonts.conf"
 mkdir -p "$HOME/.config/fontconfig"
 cp "$REPO_DIR/dotfiles/fontconfig/fonts.conf" "$HOME/.config/fontconfig/fonts.conf"
-
-# ghostty terminal
-backup "ghostty/config" "$HOME/.config/ghostty/config" "$REPO_DIR/dotfiles/ghostty/config"
-mkdir -p "$HOME/.config/ghostty"
-cp "$REPO_DIR/dotfiles/ghostty/config" "$HOME/.config/ghostty/config"
 
 # kitty terminal (Catppuccin palette via current-theme.conf overrides the theme)
 backup "kitty/kitty.conf" "$HOME/.config/kitty/kitty.conf" "$REPO_DIR/dotfiles/kitty/kitty.conf"
