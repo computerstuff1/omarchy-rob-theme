@@ -1,8 +1,8 @@
 # omarchy-rob-theme
 
-TRY IN VM. One-command install of my **Omarchy** desktop — a dark "Rob Theme" (Tokyo Night
-palette) with a blue `#1793d1` accent and a matching shell, bar, and window-border
-gradient.
+TRY IN VM. One-command install of my **Omarchy** (Arch-based) desktop — a dark "Rob
+Theme" built on a Tokyo Night base palette, with a blue `#1793d1` accent and a
+matching shell, bar, and window-border gradient.
 
 <img width="1920" height="1080" alt="screenshot-2026-08-28_07-21-06" src="https://github.com/user-attachments/assets/3d85bb3e-3f1f-48e3-a0f0-2f661d286b5c" />
 
@@ -19,7 +19,7 @@ cd omarchy-rob-theme
 
 That's it. The script:
 
-1. Installs dependencies (`pacman-contrib`, `jq`, `ttf-jetbrains-mono-nerd-basic`, `yaru-icon-theme`, `yay`, `vim`, `kitty` — best-effort)
+1. Installs dependencies (`pacman-contrib`, `jq`, `ttf-jetbrains-mono-nerd-basic`, `yaru-icon-theme`, `yay`, `gvim`, `kitty`, `firefox` — best-effort)
 2. Stages the theme into `~/.config/omarchy/themes/rob-theme/`
 3. Applies it with `omarchy theme set "Rob Theme"`
 4. Installs the bar layout, plugins, Hyprland look, starship, kitty, fastfetch, vim, and the update-count helper
@@ -37,8 +37,8 @@ That's it. The script:
 
 Dependencies are installed only if missing: `pacman-contrib` (for `checkupdates`),
 `jq` (for the de-forked clones), `ttf-jetbrains-mono-nerd-basic` (the monospace
-font), `yaru-icon-theme` (icons), `vim` and `kitty` (the editor and terminal),
-and your chosen AUR helper (`yay` or `paru`) for the AUR update count.
+font), `yaru-icon-theme` (icons), `gvim` (editor), `kitty` (terminal), `firefox`
+(browser), and your chosen AUR helper (`yay` or `paru`) for the AUR update count.
 
 **Re-runnable:** safe to run any time. The first run saves timestamped backups of
 anything it overwrites under `~/.cache/omarchy-rob-theme/backup/<timestamp>/`;
@@ -60,7 +60,7 @@ omarchy-rob-theme/
 │   └── clock.patch              seconds-ticking clock precision
 ├── docs/upstream.md             the two upstream feature requests
 ├── theme/                       the "Rob Theme"
-│   ├── colors.toml              Tokyo Night palette + accent/border gradient
+│   ├── colors.toml              Tokyo Night base palette + accent/border gradient
 │   ├── shell.bar.toml           bar surface (background/text/size/border)
 │   ├── shell.lock.toml          lock screen surface
 │   ├── shell.menu.toml          menu surface
@@ -85,7 +85,7 @@ omarchy-rob-theme/
 |---|---|
 | Accent | `#1793d1` |
 | Border gradient | `#1793d1 → #999999 @ 90°` (bar, popups, notifications, windows) |
-| Palette | Tokyo Night (`background #1a1b26`, `foreground #a9b1d6`) |
+| Palette | Tokyo Night base (`background #1a1b26`, `foreground #cdd6f4`) |
 | Window layout | **master/stack** — `master` layout (`mfact 0.55`, left), new windows stack as slaves |
 | Window border | 4px, rounded 8 |
 | Blur | enabled (size 3, passes 2) |
@@ -127,7 +127,7 @@ but individual changes apply faster with the commands listed.
 
 ### Colors, accent & palette
 
-The palette is **Tokyo Night**, accent **`#1793d1`**, and lives in
+The palette is based on **Tokyo Night**, accent **`#1793d1`**, and lives in
 `theme/colors.toml`. Change `accent` or any named color there, and everything
 that reads Omarchy's theme colors (bar, terminals, prompt via `colors.toml`)
 follows. The window/bar **border gradient** is also defined here (`accent` +
