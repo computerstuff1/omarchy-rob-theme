@@ -245,7 +245,7 @@ if (( INSTALL_DEPS )); then
   info "Step 1/6 — installing dependencies"
   ensure_pkg checkupdates           omarchy pkg add pacman-contrib || warn "pacman-contrib install failed (update count will be repo-only)"
   ensure_pkg jq                     omarchy pkg add jq              || warn "jq install failed (floating bar/clock clones will be skipped)"
-  ensure_pkg vim                    omarchy pkg add vim             || warn "vim install failed"
+  ensure_pkg gvim                   omarchy pkg add gvim            || warn "gvim install failed"
   ensure_pkg kitty                  omarchy pkg add kitty           || warn "kitty install failed"
   if omarchy pkg present ttf-jetbrains-mono-nerd-basic; then
     ok "JetBrainsMono Nerd Font already installed"

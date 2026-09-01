@@ -6,7 +6,7 @@ hl.config({
     -- No gaps between windows or borders.
     gaps_in = 5,
     gaps_out = 10,
-    border_size = 4,
+    border_size = 3,
     layout = "master",
   },
 })
@@ -36,7 +36,7 @@ hl.config({
 
     -- Add background blur
     blur = {
-      enabled = true,
+      enabled = false,
       size = 3,
       passes = 2,
     },

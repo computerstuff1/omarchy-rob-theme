@@ -6,6 +6,11 @@ set background=dark
 
 augroup CustomColors
     autocmd!
+    " Keeps background transparent
+    autocmd ColorScheme * hi Normal ctermbg=NONE guibg=NONE
+    " Keeps line numbers transparent on the left gutter
+    autocmd ColorScheme * hi LineNr guibg=NONE ctermbg=NONE
+    autocmd ColorScheme * hi CursorLineNr guibg=NONE ctermbg=NONE
     " Keeps the background of your active line clean and transparent
     autocmd ColorScheme * hi CursorLine ctermbg=NONE guibg=NONE
     " Lights up your active line number in bold peach (Change hex here if wanted!)

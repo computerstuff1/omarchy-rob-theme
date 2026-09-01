@@ -1,6 +1,6 @@
 background       = "#1a1b26"
 background-alpha = 0.85
-text             = "#a9b1d6"
+text             = "#cdd6f4"
 active           = "#f7768e"
 border           = "hyprland.active-border"
 scale-with-font  = true
