@@ -87,8 +87,8 @@ omarchy-rob-theme/
 | Border gradient | `#1793d1 → #999999 @ 90°` (bar, popups, notifications, windows) |
 | Palette | Tokyo Night base (`background #1a1b26`, `foreground #cdd6f4`) |
 | Window layout | **master/stack** — `master` layout (`mfact 0.55`, left), new windows stack as slaves |
-| Window border | 4px, rounded 8 |
-| Blur | enabled (size 3, passes 2) |
+| Window border | 3px, rounded 8 |
+| Blur | disabled (size 3, passes 2) |
 | Gaps | in 5 / out 10 |
 | Font | JetBrainsMono Nerd Font |
 | Icons | Yaru-red |
