@@ -247,6 +247,7 @@ if (( INSTALL_DEPS )); then
   ensure_pkg jq                     omarchy pkg add jq              || warn "jq install failed (floating bar/clock clones will be skipped)"
   ensure_pkg gvim                   omarchy pkg add gvim            || warn "gvim install failed"
   ensure_pkg kitty                  omarchy pkg add kitty           || warn "kitty install failed"
+  ensure_pkg firefox                omarchy pkg add firefox         || warn "firefox install failed"
   if omarchy pkg present ttf-jetbrains-mono-nerd-basic; then
     ok "JetBrainsMono Nerd Font already installed"
   else
