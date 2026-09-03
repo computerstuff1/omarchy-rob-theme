@@ -4,10 +4,7 @@ TRY IN VM. One-command install of my **Omarchy** (Arch-based) desktop — a dark
 Theme" built on a Tokyo Night base palette, with a blue `#1793d1` accent and a
 matching shell, bar, and window-border gradient.
 
-<img width="1920" height="1080" alt="screenshot-2026-08-28_07-21-06" src="https://github.com/user-attachments/assets/3d85bb3e-3f1f-48e3-a0f0-2f661d286b5c" />
-
-<img width="1920" height="1080" alt="screenshot-2026-08-28_10-40-57" src="https://github.com/user-attachments/assets/f1857554-05b5-4f94-967e-8ef39d00ceb6" />
-
+<img width="1920" height="1080" alt="screenshot-2026-09-03_11-29-42" src="https://github.com/user-attachments/assets/0b55b7a5-06d8-4d1d-80e1-919ab5d292e7" />
 
 ## Install
 
