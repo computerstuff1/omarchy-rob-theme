@@ -6,7 +6,7 @@ matching shell, bar, and window-border gradient.
 
 <img width="1920" height="1080" alt="screenshot-2026-09-07_14-40-51" src="https://github.com/user-attachments/assets/55f57d03-6248-48fd-be8e-5b22398486b3" />
 
-<img width="1920" height="1080" alt="screenshot-2026-09-07_14-44-13" src="https://github.com/user-attachments/assets/a4042c10-723e-40ee-826f-3823da9dc9c8" />
+<img width="1920" height="1080" alt="screenshot-2026-09-07_14-45-46" src="https://github.com/user-attachments/assets/180a508f-86be-4908-8fca-b59d601b9d97" />
 
 ## Install
 
