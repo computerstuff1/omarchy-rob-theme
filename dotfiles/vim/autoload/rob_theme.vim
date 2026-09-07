@@ -1,4 +1,4 @@
-function! catppuccin#mocha#get() abort
+function! rob_theme#get() abort
   return {
     \ 'rosewater': ['#e8bacf', 217],
     \ 'flamingo': ['#e8bacf', 217],

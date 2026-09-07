@@ -307,7 +307,7 @@ backup "fontconfig/fonts.conf" "$HOME/.config/fontconfig/fonts.conf" "$REPO_DIR/
 mkdir -p "$HOME/.config/fontconfig"
 cp "$REPO_DIR/dotfiles/fontconfig/fonts.conf" "$HOME/.config/fontconfig/fonts.conf"
 
-# kitty terminal (Catppuccin palette via current-theme.conf overrides the theme)
+# kitty terminal (3024 Night palette via current-theme.conf overrides the theme)
 backup "kitty/kitty.conf" "$HOME/.config/kitty/kitty.conf" "$REPO_DIR/dotfiles/kitty/kitty.conf"
 backup "kitty/current-theme.conf" "$HOME/.config/kitty/current-theme.conf" "$REPO_DIR/dotfiles/kitty/current-theme.conf"
 mkdir -p "$HOME/.config/kitty"
@@ -320,7 +320,7 @@ backup "vim/colors" "$HOME/.vim/colors" "$REPO_DIR/dotfiles/vim/colors" 2>/dev/n
 backup "vim/autoload" "$HOME/.vim/autoload" "$REPO_DIR/dotfiles/vim/autoload"
 cp "$REPO_DIR/dotfiles/vim/vimrc" "$HOME/.vimrc"
 mkdir -p "$HOME/.vim/colors"
-cp "$REPO_DIR/dotfiles/vim/colors/catppuccin_mocha.vim" "$HOME/.vim/colors/catppuccin_mocha.vim"
+cp "$REPO_DIR/dotfiles/vim/colors/rob_theme.vim" "$HOME/.vim/colors/rob_theme.vim"
 mkdir -p "$HOME/.vim/autoload"
 cp -r "$REPO_DIR/dotfiles/vim/autoload/." "$HOME/.vim/autoload/"
 

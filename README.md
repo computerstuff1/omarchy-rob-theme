@@ -68,11 +68,11 @@ omarchy-rob-theme/
     ├── hypr/                    looknfeel (borders/gaps/master/blur), bindings, base flags
     ├── fontconfig/fonts.conf    JetBrainsMono Nerd Font
     ├── kitty/kitty.conf         terminal font/padding/opacity/tab style
-    ├── kitty/current-theme.conf Catppuccin-Mocha palette (overrides the theme)
+    ├── kitty/current-theme.conf 3024 Night palette (overrides the theme)
     ├── fastfetch/               config + custom Linux logo (path auto-rewritten)
     ├── plugins/rob.{menubutton,workspaces,updates}   self-contained bar widgets
     ├── hooks/rob-theme-repatch.sh                    post-update hook
-    ├── vim/                     .vimrc + catppuccin_mocha.vim colorscheme
+    ├── vim/                     .vimrc + rob_theme.vim colorscheme
     └── bin/system-update-count  pending repo+AUR update counter
 ```
 
@@ -113,7 +113,7 @@ but individual changes apply faster with the commands listed.
 | Key bindings | `dotfiles/hypr/bindings.lua` | `~/.config/hypr/bindings.lua` |
 | Hyprland load order / flags | `dotfiles/hypr/hyprland.lua` | `~/.config/hypr/hyprland.lua` |
 | Terminal font/padding/opacity (kitty) | `dotfiles/kitty/kitty.conf` | `~/.config/kitty/kitty.conf` |
-| Kitty palette (Catppuccin) | `dotfiles/kitty/current-theme.conf` | `~/.config/kitty/current-theme.conf` |
+| Kitty palette (3024 Night) | `dotfiles/kitty/current-theme.conf` | `~/.config/kitty/current-theme.conf` |
 | Monospace font | `dotfiles/fontconfig/fonts.conf` | `~/.config/fontconfig/fonts.conf` |
 | fastfetch | `dotfiles/fastfetch/config.jsonc` | `~/.config/fastfetch/config.jsonc` |
 | fastfetch logo | `dotfiles/fastfetch/Linux.png` | `~/.local/share/omarchy-rob-theme/Linux.png` |
@@ -132,7 +132,7 @@ follows. The window/bar **border gradient** is also defined here (`accent` +
 surfaces together. The **menu** styling is a per-section override in
 `theme/shell.menu.toml`.
 
-> Note: **kitty** uses a bundled **Catppuccin Mocha** palette
+> Note: **kitty** uses a bundled **3024 Night** palette
 > (`dotfiles/kitty/current-theme.conf`) that overrides the theme, so recolouring
 > kitty means editing that file instead of `theme/colors.toml`.
 
@@ -186,13 +186,13 @@ the focused workspace, bound in `bindings.lua`.
 ### Terminals, prompt, font, vim, fastfetch
 
 - **Kitty:** `dotfiles/kitty/kitty.conf` (font, padding, opacity, tab style) and
-  `dotfiles/kitty/current-theme.conf` (Catppuccin Mocha palette).
+  `dotfiles/kitty/current-theme.conf` (3024 Night palette).
 - **Prompt:** `dotfiles/starship/starship.toml` (two-line layout, module colors).
 - **Font:** the theme uses `JetBrainsMono Nerd Font`. Change it in
   `dotfiles/fontconfig/fonts.conf` (system monospace) *and* the kitty config
   (or run `omarchy font set <name>` instead; `omarchy font list`).
 - **Vim:** `dotfiles/vim/vimrc` (statusline, indentation, colorscheme call) and
-  `dotfiles/vim/colors/catppuccin_mocha.vim`.
+  `dotfiles/vim/colors/rob_theme.vim`.
 - **fastfetch:** `dotfiles/fastfetch/config.jsonc` — note the logo `source` is
   the placeholder `@LOGO_PATH@` that `install.sh` rewrites at install time, so
   keep it as-is when editing.

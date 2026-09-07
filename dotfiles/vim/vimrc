@@ -21,7 +21,7 @@ augroup END
 
 " Forcefully trigger syntax tracking and load the theme
 syntax on
-colorscheme catppuccin_mocha
+colorscheme rob_theme
 
 " ====================================================================
 " 2. GENERAL QUALITY OF LIFE SETTINGS

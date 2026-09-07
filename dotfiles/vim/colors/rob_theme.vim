@@ -1,11 +1,11 @@
-" Catppuccin Mocha for Standard Vim
-" Palette-driven: colours come from autoload/catppuccin/mocha.vim.
+" Rob Theme for Standard Vim (3024 Night palette)
+" Palette-driven: colours come from autoload/rob_theme.vim.
 hi clear
 if exists("syntax_on")
   syntax reset
 endif
 
-let s:palette = catppuccin#mocha#get()
+let s:palette = rob_theme#get()
 
 function! s:hex(name) abort
   return s:palette[a:name][0]
@@ -25,7 +25,7 @@ function! s:hi(group, fg, bg, ...) abort
   execute l:cmd
 endfunction
 
-" Core Mocha Palette Highlights
+" Core palette highlights
 call s:hi('Normal', 'text', 'base', 'ctermbg=none')
 call s:hi('NonText', 'surface2', '')
 call s:hi('Comment', 'overlay0', '', 'cterm=italic gui=italic')
@@ -47,4 +47,4 @@ call s:hi('StatusLine', 'text', 'surface0')
 call s:hi('StatusLineNC', 'overlay0', 'mantle')
 call s:hi('VertSplit', 'surface1', 'base')
 
-let g:colors_name = 'catppuccin_mocha'
+let g:colors_name = 'rob_theme'
