@@ -84,7 +84,7 @@ BarWidget {
       bar: root.bar
       text: root.pacmanIcon
       active: root.updateCount > 0
-      activeColor: "#ffd75f"
+      activeColor: "#fcec02"
       interactive: false
       slotSize: Style.bar.iconSlot
       opticalSize: Style.bar.iconCanvas

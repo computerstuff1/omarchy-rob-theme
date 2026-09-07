@@ -1,9 +1,9 @@
 [menu]
-background            = "#1a1b26"
+background            = "#090200"
 background-alpha      = 0.85
-text                  = "#999999"
+text                  = "#5b5754"
 border                = "hyprland.active-border"
 border-alpha          = 1.0
-selected-border       = "#1793d1"
+selected-border       = "#00a0e4"
 selected-border-alpha = 1.0
 selected-border-width = 2

@@ -14,9 +14,9 @@ augroup CustomColors
     " Keeps the background of your active line clean and transparent
     autocmd ColorScheme * hi CursorLine ctermbg=NONE guibg=NONE
     " Lights up your active line number in bold peach (Change hex here if wanted!)
-    autocmd ColorScheme * hi CursorLineNr ctermfg=14 guifg=#fab387 cterm=bold gui=bold
+    autocmd ColorScheme * hi CursorLineNr ctermfg=14 guifg=#e06a1a cterm=bold gui=bold
     " Changes your text selection highlight to a smooth custom purple
-    autocmd ColorScheme * hi Visual guibg=#cba6f7 guifg=#11111b
+    autocmd ColorScheme * hi Visual guibg=#a06994 guifg=#090200
 augroup END
 
 " Forcefully trigger syntax tracking and load the theme

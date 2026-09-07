@@ -1,7 +1,7 @@
 # omarchy-rob-theme
 
 TRY IN VM. One-command install of my **Omarchy** (Arch-based) desktop — a dark "Rob
-Theme" built on a Tokyo Night base palette, with a blue `#1793d1` accent and a
+Theme" built on a 3024 Night palette, with a blue `#00a0e4` accent and a
 matching shell, bar, and window-border gradient.
 
 <img width="1920" height="1080" alt="screenshot-2026-09-03_11-29-42" src="https://github.com/user-attachments/assets/0b55b7a5-06d8-4d1d-80e1-919ab5d292e7" />
@@ -80,9 +80,9 @@ omarchy-rob-theme/
 
 | Element | Value |
 |---|---|
-| Accent | `#1793d1` |
-| Border gradient | `#1793d1 → #999999 @ 90°` (bar, popups, notifications, windows) |
-| Palette | Tokyo Night base (`background #1a1b26`, `foreground #cdd6f4`) |
+| Accent | `#00a0e4` |
+| Border gradient | `#00a0e4 → #494542 @ 90°` (bar, popups, notifications, windows) |
+| Palette | 3024 Night (`background #090200`, `foreground #d6d4d3`) |
 | Window layout | **master/stack** — `master` layout (`mfact 0.55`, left), new windows stack as slaves |
 | Window border | 3px, rounded 8 |
 | Blur | disabled (size 3, passes 2) |
@@ -124,7 +124,7 @@ but individual changes apply faster with the commands listed.
 
 ### Colors, accent & palette
 
-The palette is based on **Tokyo Night**, accent **`#1793d1`**, and lives in
+The palette is based on **3024 Night**, accent **`#00a0e4`**, and lives in
 `theme/colors.toml`. Change `accent` or any named color there, and everything
 that reads Omarchy's theme colors (bar, terminals, prompt via `colors.toml`)
 follows. The window/bar **border gradient** is also defined here (`accent` +
@@ -230,7 +230,7 @@ cycle wallpapers).
 
 ```bash
 # 1. Change the accent colour everywhere
-sed -i 's/#1793d1/#YOURHEX/' theme/colors.toml && omarchy theme set "Rob Theme"
+sed -i 's/#00a0e4/#YOURHEX/' theme/colors.toml && omarchy theme set "Rob Theme"
 
 # 2. Make the bar float more / less
 #    edit dotfiles/shell.json -> "bar": { "margin": 12, "radius": 16 }

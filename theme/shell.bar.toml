@@ -1,7 +1,7 @@
-background       = "#1a1b26"
+background       = "#090200"
 background-alpha = 0.85
-text             = "#cdd6f4"
-active           = "#f7768e"
+text             = "#d6d4d3"
+active           = "#da2c20"
 border           = "hyprland.active-border"
 scale-with-font  = true
 size-horizontal  = 26
