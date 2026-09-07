@@ -57,7 +57,7 @@ omarchy-rob-theme/
 │   └── clock.patch              seconds-ticking clock precision
 ├── docs/upstream.md             the two upstream feature requests
 ├── theme/                       the "Rob Theme"
-│   ├── colors.toml              Tokyo Night base palette + accent/border gradient
+│   ├── colors.toml              3024 Night palette + accent/border gradient
 │   ├── shell.bar.toml           bar surface (background/text/size/border)
 │   ├── shell.lock.toml          lock screen surface
 │   ├── shell.menu.toml          menu surface
