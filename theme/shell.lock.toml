@@ -1,5 +1,5 @@
 text             = "#d6d4d3"
-placeholder      = "#7f7c7b"
+placeholder      = "#7f7f7f"
 text-error       = "#da2c20"
 border           = "hyprland.active-border"
 border-active    = "hyprland.active-border"
